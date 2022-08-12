@@ -1,6 +1,4 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+
 
 ## itemsテーブル
 |Column        |Type      |Options                       |
@@ -45,4 +43,15 @@
 - has_one :address
 
 ## addressesテーブル
-=======
+|Column        |Type        |Options                       |
+|--------------|------------|------------------------------|
+|post          |string      |null: false                   |
+|prefecture_id |integer     |null: false                   |
+|city          |string      |null: false                   |
+|block-num     |string      |null: false                   |
+|building      |string      |                              |
+|phone-num     |string      |null: false                   |
+|buy           |references  |null: false, foreign_key: true|
+### Association
+- belongs_to :buy
+
