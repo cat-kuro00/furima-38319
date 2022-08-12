@@ -16,18 +16,19 @@
 
 
 ## usersテーブル
-|Column          |Type  |Options                  |
-|----------------|------|-------------------------|
-|last_name       |string|null: false              |
-|first_name      |string|null: false              |
-|last_name_kana  |string|null: false              |
-|first_name_kana |string|null: false              |
-|birthday        |date  |null: false              |
-|nickname        |string|null: false              |
-|email           |string|null: false, unique: true|
-|password        |string|null: false              |
+|Column            |Type  |Options                  |
+|------------------|------|-------------------------|
+|last_name         |string|null: false              |
+|first_name        |string|null: false              |
+|last_name_kana    |string|null: false              |
+|first_name_kana   |string|null: false              |
+|birthday          |date  |null: false              |
+|nickname          |string|null: false              |
+|email             |string|null: false, unique: true|
+|encrypted_password|string|null: false              |
 ### Association
 - has_many :items
+- has_one :buy
 
 ## buysテーブル
 |Column     |Type        |Options                       |
@@ -48,6 +49,6 @@
 |block-num     |string      |null: false                   |
 |building      |string      |                              |
 |phone-num     |string      |null: false                   |
-|user          |references  |null: false, foreign_key: true|
+|buy           |references  |null: false, foreign_key: true|
 ### Association
 - belongs_to :buy
