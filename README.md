@@ -6,7 +6,7 @@
 |category_id   |integer   |null: false                   |
 |condition_id  |integer   |null: false                   |
 |shipping_id   |integer   |null: false                   |
-|ship_from_id  |integer   |null: false                   |
+|prefecture_id |integer   |null: false                   |
 |ship_days_id  |integer   |null: false                   |
 |price         |integer   |null: false                   |
 |user          |references|null: false, foreign_key: true|
@@ -16,13 +16,16 @@
 
 
 ## usersテーブル
-|Column     |Type  |Options                  |
-|-----------|------|-------------------------|
-|name       |string|null: false              |
-|birthday   |date  |null: false              |
-|nickname   |string|null: false              |
-|email      |string|null: false, unique: true|
-|password   |string|null: false              |
+|Column          |Type  |Options                  |
+|----------------|------|-------------------------|
+|last_name       |string|null: false              |
+|first_name      |string|null: false              |
+|last_name_kana  |string|null: false              |
+|first_name_kana |string|null: false              |
+|birthday        |date  |null: false              |
+|nickname        |string|null: false              |
+|email           |string|null: false, unique: true|
+|password        |string|null: false              |
 ### Association
 - has_many :items
 
@@ -37,14 +40,14 @@
 - has_one :address
 
 ## addressテーブル
-|Column     |Type        |Options                       |
-|-----------|------------|------------------------------|
-|post       |string      |null: false                   |
-|prefecture |string      |null: false                   |
-|city       |string      |null: false                   |
-|block-num  |string      |                              |
-|phone-num  |string      |null: false                   |
-|user       |references  |null: false, foreign_key: true|
+|Column        |Type        |Options                       |
+|--------------|------------|------------------------------|
+|post          |string      |null: false                   |
+|prefecture_id |integer     |null: false                   |
+|city          |string      |null: false                   |
+|block-num     |string      |null: false                   |
+|building      |string      |                              |
+|phone-num     |string      |null: false                   |
+|user          |references  |null: false, foreign_key: true|
 ### Association
-- belongs_to :user
 - belongs_to :buy
