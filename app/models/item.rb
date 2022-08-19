@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :shipping
   belongs_to :prefecture_code
   belongs_to :ship_days
+  has_one_attached :image
 
   validates :category, presence: true
   validates :condition, presence: true
