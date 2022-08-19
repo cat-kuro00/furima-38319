@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   validates :shipping, presence: true
   validates :prefecture_code, presence: true
   validates :ship_days, presence: true
+  validates :price, presence: true, numericality: { in: 300..9999999 }
 
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
