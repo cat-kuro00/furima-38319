@@ -66,8 +66,16 @@ RSpec.describe Item, type: :model do
         
         expect(@item.errors.full_messages).to include "Price must be greater than 299"
       end
-
-      
+      it 'priceに半角数字以外が含まれている場合は保存できない' do
+        @item.price = 'q'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price is not a number"
+      end
+      it 'priceが9_999_999円を超えると保存できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be less than 9999999"
+      end
       
 
     end
