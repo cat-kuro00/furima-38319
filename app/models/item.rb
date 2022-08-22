@@ -9,12 +9,13 @@ class Item < ApplicationRecord
 
   validates :image, presence: true
   validates :name, presence: true
+  validates :info, presence: true
   validates :category, presence: true
   validates :condition, presence: true
   validates :shipping, presence: true
   validates :prefecture, presence: true
   validates :ship_days, presence: true
-  validates :price, presence: true, numericality: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }
+  validates :price, presence: true, numericality: { greater_than: 299,less_than: 9999999 }, format: { with: /\A[0-9]+\z/ }
 
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
