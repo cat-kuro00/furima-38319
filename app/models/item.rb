@@ -23,5 +23,5 @@ class Item < ApplicationRecord
   validates :shipping_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 0 , message: "can't be blank"}
   validates :ship_days_id, numericality: { other_than: 1 , message: "can't be blank"}
-  # id:1以外のときに保存できる デフォルトのエラーメッセージでは「must be other than 0」と表示されてしまうため。
+  
 end
