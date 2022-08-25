@@ -1,8 +1,8 @@
-class BuyAdress
+class BuyAddress
   include ActiveModel::Model
-  attr_accessor :hoge,:fuga...
+  attr_accessor :buy,:address
 
-  # ここにバリデーションの処理を書く
+  validates :image, presence: true
 
   def save
     # 各テーブルにデータを保存する処理を書く
