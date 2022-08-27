@@ -4,29 +4,33 @@ class OrdersController < ApplicationController
     @item = Item.find_by(id: params[:item_id])
     
 
-    @order = Order.new
+    @order = BuyAddress.new
+  end
+
+  def new
+    @buy_address = BuynAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
+    @buy_address = BuyAddress.new(order_params)
+    if @buy_address.valid?
       Payjp.api_key = "sk_test_35604bbb7014a1376345c4bf"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
       Payjp::Charge.create(
         amount: order_params[:price],  # 商品の値段
         card: order_params[:token],    # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
-      @order.save
-      return redirect_to root_path
+      @buy_address.save
+      redirect_to root_path
     else
-      render 'index'
+      render :new
     end
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:price).merge(token: params[:token])
+    params.require(:buy_address).permit(:post, :prefecture_id, :city, :block_num, :building, :price, :phone_num, :buy_id).merge(token: params[:token], user_id: current_user.id)
   end
 
 end
