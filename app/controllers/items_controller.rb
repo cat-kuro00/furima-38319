@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user_id
+    unless current_user.id == @item.user_id && @item.buy.presence == nil
       redirect_to action: :index
     else
       @item = Item.find(params[:id])

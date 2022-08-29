@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
+   before_action :authenticate_user!
    before_action :set, only: [:index, :create]
+   before_action :top_page, only: :index
 
   def index
     @buy_address = BuyAddress.new
@@ -32,5 +34,15 @@ class OrdersController < ApplicationController
     @item = Item.find_by(id: params[:item_id])
   end
 
+  def top_page
+    @item = Item.find_by(id: params[:item_id])
+    unless current_user.id == @item.user_id 
+      if @item.buy.present?
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
+  end
 
 end
