@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :buy_address do
-    token {}
+    token {"tok_abcdefghijk00000000000000000"}
     post { "111-1111" }
     prefecture_id { 2 }
     city { "あああ" }
@@ -8,8 +8,7 @@ FactoryBot.define do
     building { "111" }
     phone_num { "11111111111" }
 
-    association :buy, :user, :item
-    
+
     
   end
 end
