@@ -27,7 +27,6 @@ RSpec.describe Item, type: :model do
       it 'infoが空では保存できない' do
         @item.info = ''
         @item.valid?
-        
         expect(@item.errors.full_messages).to include "Info can't be blank"
       end
       it 'category_idが空では保存できない' do
