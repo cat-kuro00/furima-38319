@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   def create
     @buy_address = BuyAddress.new(order_params)
     if @buy_address.valid?
-      Payjp.api_key = "sk_test_35604bbb7014a1376345c4bf"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
         amount: @item.price,  # 商品の値段
         card: order_params[:token],    # カードトークン
@@ -35,7 +35,6 @@ class OrdersController < ApplicationController
   end
 
   def top_page
-    @item = Item.find_by(id: params[:item_id])
     unless current_user.id == @item.user_id 
       if @item.buy.present?
         redirect_to root_path
