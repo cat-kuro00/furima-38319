@@ -40,6 +40,11 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include "Prefecture can't be blank"
       end
+      it 'prefecture_idが"---"のときは保存できないこと' do
+        @buy_address.prefecture_id = 0
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include "Prefecture can't be blank"
+      end
       it 'cityが空だと保存できないこと' do
         @buy_address.city = ''
         @buy_address.valid?
@@ -55,10 +60,20 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include "Phone num can't be blank"
       end
-      it 'phone_numが10桁以上11桁以内の半角数値でないと保存できないこと' do
+      it 'phone_numが半角数値でないと保存できないこと' do
         @buy_address.phone_num = '１１１１１１１１１１'
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include "Phone num is not a number"
+      end
+      it 'phone_numが9桁以下では保存できないこと' do
+        @buy_address.phone_num = '111111111'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include "Phone num is too short (minimum is 10 characters)"
+      end
+      it 'phone_numが12桁以上では保存できないこと' do
+        @buy_address.phone_num = '111111111111'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include "Phone num is too long (maximum is 11 characters)"
       end
       it 'userが紐付いていないと保存できないこと' do
         @buy_address.user_id = nil

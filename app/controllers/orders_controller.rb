@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  #  protect_from_forgery #追記
+
+
    before_action :authenticate_user!
    before_action :set, only: [:index, :create]
    before_action :top_page, only: :index
@@ -9,6 +12,7 @@ class OrdersController < ApplicationController
 
   def create
     @buy_address = BuyAddress.new(order_params)
+    # binding.pry
     if @buy_address.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
@@ -17,7 +21,6 @@ class OrdersController < ApplicationController
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
       @buy_address.save
-      
       redirect_to root_path
     else
       render :index
